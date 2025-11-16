@@ -7,7 +7,7 @@ public abstract class Main {
         File f = new File("Scoreboard.txt");
         Scanner s = new Scanner(f);
         String[] game;
-        Map<String, Integer> scores = new HashMap<String, Integer>();
+        Map<String, Integer> scores = new HashMap<>();
         while (s.hasNextLine()) {
             boolean isTeam1 = true;
             int[] point = {0, 0};
@@ -25,6 +25,8 @@ public abstract class Main {
             if (point[0] > point[1]) scores.put(game[0], scores.get(game[0]) + 1);
             if (point[1] > point[0]) scores.put(game[1], scores.get(game[1]) + 1);
         }
-        System.out.println(scores);
+        List<Map.Entry<String, Integer>> sortResult = scores.entrySet()
+                .stream().sorted(Map.Entry.comparingByValue()).toList();
+        System.out.println(sortResult);
     }
 }
